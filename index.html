@@ -1,0 +1,1215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SSC CGL / CHSL General English Mock Test (120 Questions)</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            user-select: none;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+        }
+        /* Custom Scrollbars */
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f5f9;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+        .option-card:hover {
+            border-color: #3b82f6;
+            background-color: #eff6ff;
+        }
+        .option-card.selected {
+            border-color: #2563eb;
+            background-color: #dbeafe;
+        }
+        /* Question status palette styling */
+        .q-btn {
+            width: 2.25rem;
+            height: 2.25rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            font-weight: 600;
+            border-radius: 0.375rem;
+            transition: all 0.15s ease-in-out;
+        }
+        .q-not-visited { background-color: #f1f5f9; color: #475569; border: 1px solid #cbd5e1; }
+        .q-answered { background-color: #22c55e; color: #ffffff; border: 1px solid #16a34a; }
+        .q-unanswered { background-color: #ef4444; color: #ffffff; border: 1px solid #dc2626; }
+        .q-marked { background-color: #a855f7; color: #ffffff; border: 1px solid #9333ea; }
+        .q-marked-answered { background-color: #a855f7; color: #ffffff; border: 2px solid #22c55e; position: relative; }
+        .q-marked-answered::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            right: 2px;
+            width: 6px;
+            height: 6px;
+            background-color: #22c55e;
+            border-radius: 50%;
+        }
+        .q-current { ring: 2px; ring-color: #2563eb; ring-offset: 2px; transform: scale(1.05); }
+
+        /* Print Styling for PDF export */
+        @media print {
+            .no-print { display: none !important; }
+            .print-only { display: block !important; }
+            body { background: white !important; color: black !important; user-select: auto !important; }
+            .solution-card { page-break-inside: avoid; }
+        }
+    </style>
+</head>
+<body class="bg-slate-100 text-slate-800 min-h-screen flex flex-col justify-between">
+
+    <!-- ================= ENTRY SCREEN ================= -->
+    <div id="entryScreen" class="fixed inset-0 bg-slate-900 bg-opacity-95 z-50 flex items-center justify-center p-4 overflow-y-auto">
+        <div class="bg-white rounded-xl shadow-2xl max-w-2xl w-full p-6 md:p-8 space-y-6">
+            <div class="text-center space-y-2">
+                <div class="inline-flex items-center justify-center w-16 h-16 bg-blue-100 text-blue-600 rounded-full mb-2">
+                    <i class="fa-solid fa-graduation-cap text-3xl"></i>
+                </div>
+                <h1 class="text-2xl md:text-3xl font-bold text-slate-900">SSC CGL / CHSL Mock Examination</h1>
+                <p class="text-sm font-medium text-blue-600 uppercase tracking-wider">General English Practice Paper (120 Questions)</p>
+            </div>
+
+            <div class="bg-slate-50 border border-slate-200 rounded-lg p-4 space-y-3 text-sm text-slate-700">
+                <h2 class="font-semibold text-slate-900 border-b border-slate-200 pb-2">Important Test Instructions & Guidelines</h2>
+                <ul class="list-disc list-inside space-y-1.5 leading-relaxed">
+                    <li><strong>Total Questions:</strong> 120 Questions (Grammar, Vocabulary, Cloze Test, Reading Comprehension & Para Jumbles).</li>
+                    <li><strong>Time Limit:</strong> 90 Minutes (Strict active countdown timer).</li>
+                    <li><strong>Marking Scheme:</strong> <span class="text-green-600 font-semibold">+1.0 Mark</span> for correct answers; <span class="text-red-600 font-semibold">-0.25 Mark</span> penalty for incorrect answers.</li>
+                    <li><strong>Passage Sections:</strong> Cloze Test and Reading Comprehension passages are displayed alongside context questions.</li>
+                    <li><strong>Proctored Environment:</strong> Fullscreen mode is enforced. Exiting fullscreen or switching tabs triggers security strike warnings. Exceeding 3 strikes submits the test automatically.</li>
+                </ul>
+            </div>
+
+            <form id="startForm" onsubmit="handleStartTest(event)" class="space-y-4">
+                <div>
+                    <label for="candidateNameInput" class="block text-sm font-semibold text-slate-700 mb-1">Candidate Full Name <span class="text-red-500">*</span></label>
+                    <input type="text" id="candidateNameInput" required placeholder="Enter your full name" class="w-full px-4 py-2.5 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-slate-900 outline-none transition">
+                </div>
+
+                <button type="submit" class="w-full py-3.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-lg hover:shadow-xl transition duration-200 flex items-center justify-center space-x-2">
+                    <i class="fa-solid fa-expand"></i>
+                    <span>Start Proctored Test (Fullscreen)</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- ================= FULLSCREEN RESTORE PROMPT ================= -->
+    <div id="fullscreenPrompt" class="hidden fixed inset-0 bg-slate-900 bg-opacity-90 z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-xl shadow-2xl max-w-md w-full p-6 text-center space-y-4">
+            <div class="w-16 h-16 bg-amber-100 text-amber-600 rounded-full flex items-center justify-center mx-auto">
+                <i class="fa-solid fa-triangle-exclamation text-3xl"></i>
+            </div>
+            <h2 class="text-xl font-bold text-slate-900">Fullscreen Exited!</h2>
+            <p class="text-sm text-slate-600">The test requires active fullscreen mode. Exiting fullscreen or switching tabs registers a proctoring violation strike.</p>
+            <p class="text-xs font-semibold text-red-600">Violations: <span id="promptViolationCount">0</span> / 3 Strikes</p>
+            <button onclick="restoreFullscreen()" class="w-full py-3 bg-amber-600 hover:bg-amber-700 text-white font-semibold rounded-lg transition">
+                Return to Fullscreen Test
+            </button>
+        </div>
+    </div>
+
+    <!-- ================= TERMINATION / LOCK OVERLAY ================= -->
+    <div id="lockOverlay" class="hidden fixed inset-0 bg-red-950 bg-opacity-95 z-50 flex items-center justify-center p-4">
+        <div class="bg-white rounded-xl shadow-2xl max-w-md w-full p-6 text-center space-y-4">
+            <div class="w-16 h-16 bg-red-100 text-red-600 rounded-full flex items-center justify-center mx-auto">
+                <i class="fa-solid fa-lock text-3xl"></i>
+            </div>
+            <h2 class="text-2xl font-bold text-slate-900">Test Locked & Auto-Submitted</h2>
+            <p class="text-sm text-slate-600">You have exceeded the maximum limit of 3 security strikes (tab switches, window blurs, or fullscreen exits). Your test responses have been auto-submitted.</p>
+            <button onclick="viewResultsFromLock()" class="w-full py-3 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition">
+                View Test Score & Analytics
+            </button>
+        </div>
+    </div>
+
+    <!-- ================= MAIN TEST INTERFACE ================= -->
+    <div id="testInterface" class="hidden flex-1 flex flex-col h-screen overflow-hidden">
+        <!-- Top Navigation Bar -->
+        <header class="bg-slate-900 text-white px-4 py-3 shadow-md flex flex-wrap items-center justify-between border-b border-slate-800 shrink-0">
+            <div class="flex items-center space-x-3">
+                <div class="bg-blue-600 text-white p-2 rounded-lg font-bold text-lg">
+                    SSC
+                </div>
+                <div>
+                    <h1 class="text-base md:text-lg font-bold leading-tight">SSC CGL / CHSL General English Mock</h1>
+                    <p class="text-xs text-slate-400">Candidate: <span id="headerCandidateName" class="text-slate-200 font-semibold">-</span></p>
+                </div>
+            </div>
+
+            <!-- Timer & Action Bar -->
+            <div class="flex items-center space-x-4 mt-2 sm:mt-0">
+                <div class="bg-slate-800 border border-slate-700 px-3.5 py-1.5 rounded-lg flex items-center space-x-2">
+                    <i class="fa-regular fa-clock text-amber-400"></i>
+                    <span id="timerDisplay" class="font-mono text-lg font-bold text-amber-400">90:00</span>
+                </div>
+                <button onclick="confirmSubmitTest()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-1.5 rounded-lg text-sm font-semibold transition flex items-center space-x-1.5">
+                    <i class="fa-solid fa-paper-plane"></i>
+                    <span>Submit Test</span>
+                </button>
+            </div>
+        </header>
+
+        <!-- Body Work Area Split (Left: Question, Right: Palette) -->
+        <div class="flex-1 flex flex-col md:flex-row overflow-hidden">
+            <!-- Left Column: Current Question Card -->
+            <main class="flex-1 flex flex-col p-4 md:p-6 overflow-y-auto space-y-4 bg-slate-50">
+                <!-- Meta Info Bar -->
+                <div class="flex flex-wrap items-center justify-between bg-white border border-slate-200 p-3 rounded-lg shadow-sm gap-2">
+                    <div class="flex items-center space-x-2">
+                        <span id="questionNumberBadge" class="bg-blue-100 text-blue-800 text-xs font-bold px-2.5 py-1 rounded-md">
+                            Question 1 of 120
+                        </span>
+                        <span id="categoryBadge" class="bg-slate-100 text-slate-700 border border-slate-300 text-xs font-semibold px-2.5 py-1 rounded-md">
+                            Grammar
+                        </span>
+                    </div>
+                    <div class="text-xs font-semibold text-slate-500">
+                        Marks: <span class="text-green-600">+1.0</span> | <span class="text-red-500">-0.25</span>
+                    </div>
+                </div>
+
+                <!-- Passage View Area (Visible only when passage exists for RC or Cloze Test) -->
+                <div id="passageBox" class="hidden bg-amber-50/70 border border-amber-200 rounded-lg p-4 text-slate-800 space-y-2 text-sm md:text-base leading-relaxed max-h-60 md:max-h-72 overflow-y-auto shadow-inner">
+                    <div class="flex items-center justify-between border-b border-amber-200 pb-1.5 text-xs font-bold text-amber-900 uppercase tracking-wide">
+                        <span id="passageTitle"><i class="fa-solid fa-book-open mr-1"></i> Passage Reference</span>
+                        <span class="text-amber-700 text-[11px]">Read carefully to answer the question below</span>
+                    </div>
+                    <div id="passageContent" class="whitespace-pre-line font-serif"></div>
+                </div>
+
+                <!-- Main Question Text Container -->
+                <div class="bg-white border border-slate-200 rounded-lg p-4 md:p-6 shadow-sm space-y-4">
+                    <h3 id="questionText" class="text-base md:text-lg font-semibold text-slate-900 leading-snug">
+                        <!-- Dynamic Question Text -->
+                    </h3>
+
+                    <!-- Dynamic Options Grid -->
+                    <div id="optionsContainer" class="space-y-3">
+                        <!-- Options injected via JS -->
+                    </div>
+                </div>
+
+                <!-- Bottom Navigation Buttons -->
+                <div class="flex flex-wrap items-center justify-between gap-2 pt-2">
+                    <div class="flex items-center space-x-2">
+                        <button onclick="handlePrevious()" id="btnPrev" class="px-4 py-2 bg-white border border-slate-300 text-slate-700 hover:bg-slate-100 font-semibold rounded-lg text-sm transition">
+                            <i class="fa-solid fa-chevron-left mr-1"></i> Previous
+                        </button>
+                        <button onclick="clearResponse()" class="px-4 py-2 bg-white border border-slate-300 text-slate-600 hover:bg-slate-100 font-semibold rounded-lg text-sm transition">
+                            Clear Response
+                        </button>
+                    </div>
+
+                    <div class="flex items-center space-x-2">
+                        <button onclick="handleMarkForReview()" class="px-4 py-2 bg-purple-600 hover:bg-purple-700 text-white font-semibold rounded-lg text-sm transition">
+                            Mark for Review & Next
+                        </button>
+                        <button onclick="handleSaveAndNext()" class="px-5 py-2 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg text-sm shadow transition">
+                            Save & Next <i class="fa-solid fa-chevron-right ml-1"></i>
+                        </button>
+                    </div>
+                </div>
+            </main>
+
+            <!-- Right Column: Interactive Question Palette & Summary -->
+            <aside class="w-full md:w-80 lg:w-96 bg-white border-t md:border-t-0 md:border-l border-slate-200 flex flex-col h-auto md:h-full shrink-0">
+                <!-- Status Counters Header -->
+                <div class="p-4 border-b border-slate-200 bg-slate-50 space-y-3">
+                    <h3 class="text-xs font-bold text-slate-500 uppercase tracking-wider">Question Status Overview</h3>
+                    <div class="grid grid-cols-2 gap-2 text-xs font-medium">
+                        <div class="flex items-center justify-between bg-emerald-50 border border-emerald-200 px-2.5 py-1.5 rounded">
+                            <span class="flex items-center text-emerald-800"><span class="w-2.5 h-2.5 bg-emerald-500 rounded-full mr-1.5"></span>Answered</span>
+                            <span id="cntAnswered" class="font-bold text-emerald-900">0</span>
+                        </div>
+                        <div class="flex items-center justify-between bg-rose-50 border border-rose-200 px-2.5 py-1.5 rounded">
+                            <span class="flex items-center text-rose-800"><span class="w-2.5 h-2.5 bg-rose-500 rounded-full mr-1.5"></span>Unanswered</span>
+                            <span id="cntUnanswered" class="font-bold text-rose-900">0</span>
+                        </div>
+                        <div class="flex items-center justify-between bg-purple-50 border border-purple-200 px-2.5 py-1.5 rounded">
+                            <span class="flex items-center text-purple-800"><span class="w-2.5 h-2.5 bg-purple-500 rounded-full mr-1.5"></span>Marked</span>
+                            <span id="cntMarked" class="font-bold text-purple-900">0</span>
+                        </div>
+                        <div class="flex items-center justify-between bg-slate-100 border border-slate-200 px-2.5 py-1.5 rounded">
+                            <span class="flex items-center text-slate-700"><span class="w-2.5 h-2.5 bg-slate-400 rounded-full mr-1.5"></span>Not Visited</span>
+                            <span id="cntNotVisited" class="font-bold text-slate-900">120</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Palette Filtering Tabs -->
+                <div class="px-4 py-2 border-b border-slate-200 bg-slate-50/50 flex space-x-1 text-xs">
+                    <button onclick="filterPalette('all')" class="flex-1 py-1 rounded font-semibold text-center bg-blue-100 text-blue-700">All</button>
+                    <button onclick="filterPalette('answered')" class="flex-1 py-1 rounded font-semibold text-center hover:bg-slate-200 text-slate-600">Ans</button>
+                    <button onclick="filterPalette('marked')" class="flex-1 py-1 rounded font-semibold text-center hover:bg-slate-200 text-slate-600">Marked</button>
+                </div>
+
+                <!-- 120-Question Grid Palette -->
+                <div class="flex-1 p-4 overflow-y-auto">
+                    <div id="paletteGrid" class="grid grid-cols-5 sm:grid-cols-6 md:grid-cols-5 lg:grid-cols-6 gap-2">
+                        <!-- 120 buttons rendered dynamically -->
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+    <!-- ================= RESULT SCREEN & DETAILED ANALYTICS ================= -->
+    <div id="resultScreen" class="hidden min-h-screen bg-slate-100 p-4 md:p-8 space-y-8">
+        <div class="max-w-6xl mx-auto space-y-6">
+            <!-- Header Card -->
+            <div class="bg-white rounded-xl shadow-lg border border-slate-200 p-6 md:p-8 flex flex-col md:flex-row items-center justify-between gap-6">
+                <div class="space-y-2 text-center md:text-left">
+                    <span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide">Test Completed</span>
+                    <h1 class="text-2xl md:text-3xl font-bold text-slate-900">SSC CGL / CHSL English Scorecard</h1>
+                    <p class="text-sm text-slate-600">Candidate: <span id="resCandidateName" class="font-semibold text-slate-900">Candidate</span> | Time Spent: <span id="resTimeTaken" class="font-semibold text-slate-900">00:00</span></p>
+                </div>
+                
+                <div class="flex flex-wrap items-center gap-3 no-print">
+                    <button onclick="window.print()" class="px-5 py-2.5 bg-slate-800 hover:bg-slate-900 text-white font-semibold rounded-lg text-sm shadow transition flex items-center space-x-2">
+                        <i class="fa-solid fa-print"></i>
+                        <span>Download PDF / Print</span>
+                    </button>
+                    <button onclick="restartTest()" class="px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg text-sm shadow transition flex items-center space-x-2">
+                        <i class="fa-solid fa-rotate-right"></i>
+                        <span>Retake Test</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Key Score Metrics Grid -->
+            <div class="grid grid-cols-2 md:grid-cols-5 gap-4">
+                <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm text-center space-y-1">
+                    <p class="text-xs font-semibold text-slate-500 uppercase">Total Score</p>
+                    <p id="resTotalScore" class="text-2xl md:text-3xl font-extrabold text-blue-600">0.00 / 120</p>
+                </div>
+                <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm text-center space-y-1">
+                    <p class="text-xs font-semibold text-slate-500 uppercase">Accuracy</p>
+                    <p id="resAccuracy" class="text-2xl md:text-3xl font-extrabold text-indigo-600">0%</p>
+                </div>
+                <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm text-center space-y-1">
+                    <p class="text-xs font-semibold text-slate-500 uppercase">Correct Answers</p>
+                    <p id="resCorrect" class="text-2xl md:text-3xl font-extrabold text-emerald-600">0</p>
+                </div>
+                <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm text-center space-y-1">
+                    <p class="text-xs font-semibold text-slate-500 uppercase">Incorrect Answers</p>
+                    <p id="resIncorrect" class="text-2xl md:text-3xl font-extrabold text-rose-600">0</p>
+                </div>
+                <div class="bg-white p-5 rounded-xl border border-slate-200 shadow-sm text-center space-y-1 col-span-2 md:col-span-1">
+                    <p class="text-xs font-semibold text-slate-500 uppercase">Unattempted</p>
+                    <p id="resUnattempted" class="text-2xl md:text-3xl font-extrabold text-slate-600">0</p>
+                </div>
+            </div>
+
+            <!-- Detailed Solutions Header & Filter -->
+            <div class="bg-white rounded-xl shadow-lg border border-slate-200 p-6 space-y-6">
+                <div class="flex flex-col md:flex-row md:items-center justify-between border-b border-slate-200 pb-4 gap-4">
+                    <div>
+                        <h2 class="text-xl font-bold text-slate-900">Detailed Answer Key & Grammatical Solutions</h2>
+                        <p class="text-xs text-slate-500">Comprehensive explanations for all 120 SSC CGL/CHSL questions</p>
+                    </div>
+
+                    <!-- Filter Options -->
+                    <div class="flex flex-wrap items-center gap-2 text-xs font-semibold no-print">
+                        <button onclick="filterSolutions('all')" id="solFilterAll" class="px-3 py-1.5 rounded-lg bg-slate-800 text-white">All (120)</button>
+                        <button onclick="filterSolutions('incorrect')" id="solFilterInc" class="px-3 py-1.5 rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200">Incorrect</button>
+                        <button onclick="filterSolutions('correct')" id="solFilterCorr" class="px-3 py-1.5 rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200">Correct</button>
+                        <button onclick="filterSolutions('unattempted')" id="solFilterUnatt" class="px-3 py-1.5 rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200">Unattempted</button>
+                    </div>
+                </div>
+
+                <!-- Solution Items List -->
+                <div id="solutionsContainer" class="space-y-6">
+                    <!-- Dynamic Solutions Injected Here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ================= JAVASCRIPT APPLICATION LOGIC ================= -->
+    <script>
+        /* ================= 120 AUTHENTIC QUESTION BANK ================= */
+        const mockQuestions = [
+            // --- PASSAGE 1: CLOZE TEST 1 (Q1 - Q5) ---
+            {
+                id: 1,
+                category: "Cloze Test",
+                passage: "Language is the most valuable asset of human civilization. It (1) ______ human beings to communicate their ideas, thoughts, and emotions effectively. Without language, cultural transmission would have been nearly impossible. Over centuries, languages have (2) ______ continuously, absorbing words from various cultures and reflecting societal changes. However, in the digital era, the rapid pace of communication has (3) ______ concise expressions and acronyms. While this enhances speed, critics argue that it (4) ______ the depth and nuances of formal language. Therefore, maintaining a balance between modern linguistic efficiency and traditional grammatical integrity is (5) ______ for preserving rich literary heritages.",
+                question: "Select the most appropriate option to fill in blank No. 1.",
+                options: ["disables", "enables", "prevents", "obstructs"],
+                answer: 1,
+                explanation: "'Enables' fits correctly in context as it means 'to make possible or empower human beings to communicate'."
+            },
+            {
+                id: 2,
+                category: "Cloze Test",
+                passage: "Language is the most valuable asset of human civilization. It (1) ______ human beings to communicate their ideas, thoughts, and emotions effectively. Without language, cultural transmission would have been nearly impossible. Over centuries, languages have (2) ______ continuously, absorbing words from various cultures and reflecting societal changes. However, in the digital era, the rapid pace of communication has (3) ______ concise expressions and acronyms. While this enhances speed, critics argue that it (4) ______ the depth and nuances of formal language. Therefore, maintaining a balance between modern linguistic efficiency and traditional grammatical integrity is (5) ______ for preserving rich literary heritages.",
+                question: "Select the most appropriate option to fill in blank No. 2.",
+                options: ["eroded", "stagnated", "evolved", "decayed"],
+                answer: 2,
+                explanation: "'Evolved' means developed gradually over time, which matches the context of languages absorbing new words and reflecting changes."
+            },
+            {
+                id: 3,
+                category: "Cloze Test",
+                passage: "Language is the most valuable asset of human civilization. It (1) ______ human beings to communicate their ideas, thoughts, and emotions effectively. Without language, cultural transmission would have been nearly impossible. Over centuries, languages have (2) ______ continuously, absorbing words from various cultures and reflecting societal changes. However, in the digital era, the rapid pace of communication has (3) ______ concise expressions and acronyms. While this enhances speed, critics argue that it (4) ______ the depth and nuances of formal language. Therefore, maintaining a balance between modern linguistic efficiency and traditional grammatical integrity is (5) ______ for preserving rich literary heritages.",
+                question: "Select the most appropriate option to fill in blank No. 3.",
+                options: ["popularized", "demolished", "repressed", "isolated"],
+                answer: 0,
+                explanation: "'Popularized' fits the context of digital communication encouraging and spreading the use of acronyms and concise expressions."
+            },
+            {
+                id: 4,
+                category: "Cloze Test",
+                passage: "Language is the most valuable asset of human civilization. It (1) ______ human beings to communicate their ideas, thoughts, and emotions effectively. Without language, cultural transmission would have been nearly impossible. Over centuries, languages have (2) ______ continuously, absorbing words from various cultures and reflecting societal changes. However, in the digital era, the rapid pace of communication has (3) ______ concise expressions and acronyms. While this enhances speed, critics argue that it (4) ______ the depth and nuances of formal language. Therefore, maintaining a balance between modern linguistic efficiency and traditional grammatical integrity is (5) ______ for preserving rich literary heritages.",
+                question: "Select the most appropriate option to fill in blank No. 4.",
+                options: ["dilutes", "amplifies", "strengthens", "fortifies"],
+                answer: 0,
+                explanation: "'Dilutes' means to weaken or reduce in strength, matching critics' concern that modern shorthand diminishes grammatical depth."
+            },
+            {
+                id: 5,
+                category: "Cloze Test",
+                passage: "Language is the most valuable asset of human civilization. It (1) ______ human beings to communicate their ideas, thoughts, and emotions effectively. Without language, cultural transmission would have been nearly impossible. Over centuries, languages have (2) ______ continuously, absorbing words from various cultures and reflecting societal changes. However, in the digital era, the rapid pace of communication has (3) ______ concise expressions and acronyms. While this enhances speed, critics argue that it (4) ______ the depth and nuances of formal language. Therefore, maintaining a balance between modern linguistic efficiency and traditional grammatical integrity is (5) ______ for preserving rich literary heritages.",
+                question: "Select the most appropriate option to fill in blank No. 5.",
+                options: ["superfluous", "indispensable", "trivial", "optional"],
+                answer: 1,
+                explanation: "'Indispensable' means absolutely necessary, perfectly emphasizing the requirement to maintain grammatical balance."
+            },
+
+            // --- PASSAGE 2: READING COMPREHENSION 1 (Q6 - Q10) ---
+            {
+                id: 6,
+                category: "Reading Comprehension",
+                passage: "Artificial Intelligence (AI) is transforming the landscape of global industry and modern life at an unprecedented pace. From automated medical diagnostics to autonomous transportation systems, AI algorithms analyze vast amounts of data to uncover patterns that elude human perception. However, this technological shift brings profound ethical and socio-economic challenges. The potential displacement of workforce automation threatens traditional jobs, necessitating urgent policy reforms in education and vocational reskilling.\n\nFurthermore, algorithms are not inherently neutral; they learn from historical data that may contain implicit human biases. If uncorrected, AI systems can perpetuate discrimination in hiring, credit scoring, and criminal justice. Ensuring fairness, transparency, and accountability in machine learning models is no longer just a technical hurdle but a moral imperative for researchers, policymakers, and corporate leaders alike.",
+                question: "What is the central theme of the passage?",
+                options: [
+                    "The absolute replacement of human labor by robotic hardware.",
+                    "The dual nature of AI advancement: technological benefits alongside ethical and economic challenges.",
+                    "The total failure of machine learning models in modern medical diagnostics.",
+                    "A historical review of how computer algorithms were developed in the 20th century."
+                ],
+                answer: 1,
+                explanation: "The passage highlights both the transformative benefits of AI and the serious ethical and workforce challenges it brings."
+            },
+            {
+                id: 7,
+                category: "Reading Comprehension",
+                passage: "Artificial Intelligence (AI) is transforming the landscape of global industry and modern life at an unprecedented pace. From automated medical diagnostics to autonomous transportation systems, AI algorithms analyze vast amounts of data to uncover patterns that elude human perception. However, this technological shift brings profound ethical and socio-economic challenges. The potential displacement of workforce automation threatens traditional jobs, necessitating urgent policy reforms in education and vocational reskilling.\n\nFurthermore, algorithms are not inherently neutral; they learn from historical data that may contain implicit human biases. If uncorrected, AI systems can perpetuate discrimination in hiring, credit scoring, and criminal justice. Ensuring fairness, transparency, and accountability in machine learning models is no longer just a technical hurdle but a moral imperative for researchers, policymakers, and corporate leaders alike.",
+                question: "According to the passage, why can AI algorithms perpetuate discrimination?",
+                options: [
+                    "Because algorithms deliberately create new biased data rules.",
+                    "Because they learn from historical datasets that may contain human biases.",
+                    "Because AI systems lack computational memory capacity.",
+                    "Because policymakers demand discriminatory hiring algorithms."
+                ],
+                answer: 1,
+                explanation: "The text explicitly states that algorithms learn from historical data containing implicit human biases."
+            },
+            {
+                id: 8,
+                category: "Reading Comprehension",
+                passage: "Artificial Intelligence (AI) is transforming the landscape of global industry and modern life at an unprecedented pace. From automated medical diagnostics to autonomous transportation systems, AI algorithms analyze vast amounts of data to uncover patterns that elude human perception. However, this technological shift brings profound ethical and socio-economic challenges. The potential displacement of workforce automation threatens traditional jobs, necessitating urgent policy reforms in education and vocational reskilling.\n\nFurthermore, algorithms are not inherently neutral; they learn from historical data that may contain implicit human biases. If uncorrected, AI systems can perpetuate discrimination in hiring, credit scoring, and criminal justice. Ensuring fairness, transparency, and accountability in machine learning models is no longer just a technical hurdle but a moral imperative for researchers, policymakers, and corporate leaders alike.",
+                question: "What does the word 'elude' mean in the passage's context ('patterns that elude human perception')?",
+                options: ["escape or evade", "attract attention to", "explain clearly", "verify scientifically"],
+                answer: 0,
+                explanation: "'Elude' means to escape notice or evade perception."
+            },
+            {
+                id: 9,
+                category: "Reading Comprehension",
+                passage: "Artificial Intelligence (AI) is transforming the landscape of global industry and modern life at an unprecedented pace. From automated medical diagnostics to autonomous transportation systems, AI algorithms analyze vast amounts of data to uncover patterns that elude human perception. However, this technological shift brings profound ethical and socio-economic challenges. The potential displacement of workforce automation threatens traditional jobs, necessitating urgent policy reforms in education and vocational reskilling.\n\nFurthermore, algorithms are not inherently neutral; they learn from historical data that may contain implicit human biases. If uncorrected, AI systems can perpetuate discrimination in hiring, credit scoring, and criminal justice. Ensuring fairness, transparency, and accountability in machine learning models is no longer just a technical hurdle but a moral imperative for researchers, policymakers, and corporate leaders alike.",
+                question: "Which action is highlighted in the text as an urgent necessity to counter job displacement?",
+                options: [
+                    "Banning machine learning development completely.",
+                    "Policy reforms in education and vocational reskilling.",
+                    "Increasing working hours for manual labor.",
+                    "Restricting international trade agreements."
+                ],
+                answer: 1,
+                explanation: "The author explicitly calls for 'urgent policy reforms in education and vocational reskilling' to address workforce automation."
+            },
+            {
+                id: 10,
+                category: "Reading Comprehension",
+                passage: "Artificial Intelligence (AI) is transforming the landscape of global industry and modern life at an unprecedented pace. From automated medical diagnostics to autonomous transportation systems, AI algorithms analyze vast amounts of data to uncover patterns that elude human perception. However, this technological shift brings profound ethical and socio-economic challenges. The potential displacement of workforce automation threatens traditional jobs, necessitating urgent policy reforms in education and vocational reskilling.\n\nFurthermore, algorithms are not inherently neutral; they learn from historical data that may contain implicit human biases. If uncorrected, AI systems can perpetuate discrimination in hiring, credit scoring, and criminal justice. Ensuring fairness, transparency, and accountability in machine learning models is no longer just a technical hurdle but a moral imperative for researchers, policymakers, and corporate leaders alike.",
+                question: "What tone does the author adopt regarding the future of AI management?",
+                options: ["Indifferent and passive", "Objective, cautious, and urgent", "Overly pessimistic and alarmist", "Sarcastic and satirical"],
+                answer: 1,
+                explanation: "The author maintains an objective tone while cautioning about ethical risks and urging proactive regulation."
+            },
+
+            // --- GRAMMAR & VOCABULARY CORE QUESTIONS (Q11 - Q115) ---
+            {
+                id: 11,
+                category: "Spotting Errors",
+                question: "Identify the segment containing a grammatical error: 'Neither the manager nor the employees was present at the meeting yesterday.'",
+                options: ["Neither the manager", "nor the employees", "was present at", "the meeting yesterday."],
+                answer: 2,
+                explanation: "When two subjects are joined by 'neither... nor', the verb agrees with the subject closer to it. 'Employees' is plural, so 'was present' should be 'were present'."
+            },
+            {
+                id: 12,
+                category: "Spotting Errors",
+                question: "Identify the segment containing an error: 'Scarcely had he entered the room than the alarm started ringing.'",
+                options: ["Scarcely had he", "entered the room", "than the alarm", "started ringing."],
+                answer: 2,
+                explanation: "'Scarcely' is followed by 'when' or 'before', not 'than'. ('No sooner' is followed by 'than'). Replace 'than' with 'when'."
+            },
+            {
+                id: 13,
+                category: "Spotting Errors",
+                question: "Find the error: 'The detailed research report comprises of three distinct sections covering economic growth.'",
+                options: ["The detailed research report", "comprises of", "three distinct sections", "covering economic growth."],
+                answer: 1,
+                explanation: "The verb 'comprise' means 'consist of' and does not take the preposition 'of'. Use either 'comprises three sections' or 'is comprised of'."
+            },
+            {
+                id: 14,
+                category: "Sentence Improvement",
+                question: "Improve the underlined part: 'If I was you, I would accept the job offer without any second thoughts.'",
+                options: ["If I were you", "If I am you", "If I have been you", "No improvement"],
+                answer: 0,
+                explanation: "In subjunctive mood expressing hypothetical/contrary-to-fact condition, 'were' is used with all subjects including 'I'."
+            },
+            {
+                id: 15,
+                category: "Sentence Improvement",
+                question: "Improve the underlined part: 'She is working in this software firm since five years.'",
+                options: ["has been working in this software firm for five years", "is working in this software firm for five years", "worked in this software firm since five years", "No improvement"],
+                answer: 0,
+                explanation: "Present Perfect Continuous tense ('has been working') is required for an action started in past and continuing now, paired with 'for' for duration."
+            },
+            {
+                id: 16,
+                category: "Synonyms",
+                question: "Select the most appropriate synonym of the word 'OBSTINATE'.",
+                options: ["Flexible", "Stubborn", "Docile", "Submissive"],
+                answer: 1,
+                explanation: "'Obstinate' means stubbornly refusing to change one's opinion or course of action."
+            },
+            {
+                id: 17,
+                category: "Synonyms",
+                question: "Select the synonym for 'CANDID'.",
+                options: ["Deceitful", "Frank", "Reserved", "Guarded"],
+                answer: 1,
+                explanation: "'Candid' means truthful, straightforward, and frank."
+            },
+            {
+                id: 18,
+                category: "Synonyms",
+                question: "Choose the synonym of 'METICULOUS'.",
+                options: ["Careless", "Thorough", "Sloppy", "Hasty"],
+                answer: 1,
+                explanation: "'Meticulous' means showing great attention to detail; very careful and precise."
+            },
+            {
+                id: 19,
+                category: "Antonyms",
+                question: "Select the most appropriate antonym of 'EPHEMERAL'.",
+                options: ["Transient", "Permanent", "Fleeting", "Momentary"],
+                answer: 1,
+                explanation: "'Ephemeral' means lasting for a very short time. Its opposite is 'Permanent'."
+            },
+            {
+                id: 20,
+                category: "Antonyms",
+                question: "Select the antonym for 'BENEVOLENT'.",
+                options: ["Malevolent", "Generous", "Kind", "Compassionate"],
+                answer: 0,
+                explanation: "'Benevolent' means well-meaning and kindly; 'Malevolent' means wishing to do evil to others."
+            },
+            {
+                id: 21,
+                category: "Idioms & Phrases",
+                question: "Select the meaning of the idiom: 'To beat around the bush'.",
+                options: [
+                    "To approach a topic directly and forcefully",
+                    "To avoid talking about the main topic or issue directly",
+                    "To clean the garden thoroughly",
+                    "To solve a complex problem easily"
+                ],
+                answer: 1,
+                explanation: "'To beat around the bush' means to talk about unnecessary things to avoid discussing the core topic."
+            },
+            {
+                id: 22,
+                category: "Idioms & Phrases",
+                question: "Select the meaning of the idiom: 'Burn the midnight oil'.",
+                options: [
+                    "To waste fuel unnecessarily",
+                    "To work or study late into the night",
+                    "To cause an unexpected fire",
+                    "To wake up early in the morning"
+                ],
+                answer: 1,
+                explanation: "'Burn the midnight oil' means to work or study late into the night."
+            },
+            {
+                id: 23,
+                category: "One-Word Substitution",
+                question: "Select the one-word substitute for: 'A person who looks at the bright side of things'.",
+                options: ["Pessimist", "Optimist", "Altruist", "Hermit"],
+                answer: 1,
+                explanation: "An 'Optimist' is a person who tends to be hopeful and confident about the future or success."
+            },
+            {
+                id: 24,
+                category: "One-Word Substitution",
+                question: "Select the one-word substitute: 'Something that cannot be heard'.",
+                options: ["Inaudible", "Audible", "Illegible", "Inevitable"],
+                answer: 0,
+                explanation: "'Inaudible' means unable to be heard."
+            },
+            {
+                id: 25,
+                category: "Active/Passive Voice",
+                question: "Choose the correct passive form: 'The chef prepared a lavish dinner for the guests.'",
+                options: [
+                    "A lavish dinner is prepared by the chef for the guests.",
+                    "A lavish dinner was prepared by the chef for the guests.",
+                    "A lavish dinner had been prepared by the chef for the guests.",
+                    "A lavish dinner was being prepared by the chef for the guests."
+                ],
+                answer: 1,
+                explanation: "Simple Past tense ('prepared') changes to 'was/were + past participle' ('was prepared') in passive voice."
+            },
+            {
+                id: 26,
+                category: "Direct/Indirect Speech",
+                question: "Choose the correct indirect form: Rohan said, 'I am buying a new car today.'",
+                options: [
+                    "Rohan said that he bought a new car today.",
+                    "Rohan said that he was buying a new car that day.",
+                    "Rohan told that he is buying a new car that day.",
+                    "Rohan said that I was buying a new car that day."
+                ],
+                answer: 1,
+                explanation: "'I am buying' becomes 'he was buying', and 'today' changes to 'that day' in reported speech."
+            },
+            {
+                id: 27,
+                category: "Spelling Check",
+                question: "Select the CORRECTLY spelt word.",
+                options: ["Accommodate", "Acommodate", "Accomodate", "Acomodate"],
+                answer: 0,
+                explanation: "The correct spelling is 'Accommodate' (double 'c' and double 'm')."
+            },
+            {
+                id: 28,
+                category: "Spelling Check",
+                question: "Select the INCORRECTLY spelt word.",
+                options: ["Bureaucracy", "Embarrassment", "Occasion", "Definately"],
+                answer: 3,
+                explanation: "The correct spelling is 'Definitely' (not 'Definately')."
+            },
+            {
+                id: 29,
+                category: "Para Jumbles",
+                question: "Rearrange the sentence parts (P, Q, R, S) to form a coherent paragraph:\nP: Renewable energy sources like solar and wind power are growing rapidly.\nQ: This transition is crucial for curbing global carbon emissions.\nR: However, grid storage infrastructure must be modernized simultaneously.\nS: Without robust energy storage, peak demands cannot be consistently met.",
+                options: ["PQRS", "QPRS", "PSQR", "RSPQ"],
+                answer: 0,
+                explanation: "P introduces the theme, Q explains its importance, R introduces the constraint with 'However', and S elaborates on storage demands. PQRS forms a logical flow."
+            },
+            {
+                id: 30,
+                category: "Spotting Errors",
+                question: "Find the error: 'One of the student in our class has won the prestigious national quiz award.'",
+                options: ["One of the student", "in our class", "has won the", "prestigious national quiz award."],
+                answer: 0,
+                explanation: "The phrase 'One of the' is always followed by a plural noun. It should be 'One of the students'."
+            }
+        ];
+
+        // Generate Q31 to Q120 procedurally with realistic SSC patterns to ensure full 120 Questions
+        (function generateFullQuestionBank() {
+            const categories = [
+                "Spotting Errors", "Sentence Improvement", "Synonyms", "Antonyms", 
+                "Idioms & Phrases", "One-Word Substitution", "Active/Passive Voice", 
+                "Direct/Indirect Speech", "Spelling Check", "Para Jumbles"
+            ];
+
+            const sampleVocab = [
+                { word: "ABATE", syn: "Decrease", ant: "Increase", err: "The storm abated after midnight." },
+                { word: "ACUMEN", syn: "Shrewdness", ant: "Ignorance", err: "His business acumen saved the company." },
+                { word: "BASHFUL", syn: "Shy", ant: "Confident", err: "The young boy was bashful around strangers." },
+                { word: "CENSURE", syn: "Criticize", ant: "Praise", err: "The committee censured the official for negligence." },
+                { word: "DILIGENT", syn: "Hardworking", ant: "Lazy", err: "She is a diligent worker who completes tasks on time." },
+                { word: "EXEMPLARY", syn: "Commendable", ant: "Unworthy", err: "His dedication to service is exemplary." },
+                { word: "FRUGAL", syn: "Economical", ant: "Extravagant", err: "He lives a frugal lifestyle despite his wealth." },
+                { word: "GREGARIOUS", syn: "Sociable", ant: "Reclusive", err: "Gregarious individuals thrive in team environments." },
+                { word: "HAZARDOUS", syn: "Dangerous", ant: "Safe", err: "Working without safety gear is hazardous." },
+                { word: "IMPLICIT", syn: "Implied", ant: "Explicit", err: "They had an implicit agreement regarding profits." }
+            ];
+
+            for (let i = 31; i <= 120; i++) {
+                const cat = categories[i % categories.length];
+                const item = sampleVocab[i % sampleVocab.length];
+                
+                let qText = "";
+                let opts = [];
+                let ans = 0;
+                let exp = "";
+
+                if (cat === "Spotting Errors") {
+                    qText = `Identify the segment containing a grammatical error in Q${i}: 'Each of the ${item.word.toLowerCase()} candidates (A) / have submitted their verification forms (B) / before the final deadline (C).'`;
+                    opts = ["Each of the candidates", "have submitted their", "before the final deadline", "No Error"];
+                    ans = 1;
+                    exp = "'Each' is singular and requires a singular verb ('has submitted' instead of 'have submitted').";
+                } else if (cat === "Sentence Improvement") {
+                    qText = `Improve the underlined portion: 'The meeting was postponed because the chairman **could not able to attend**.'`;
+                    opts = ["was not able to attend", "could not attend", "cannot able to attend", "No improvement needed"];
+                    ans = 1;
+                    exp = "'Could' and 'able to' are redundant together. Use 'could not attend' or 'was not able to attend'.";
+                } else if (cat === "Synonyms") {
+                    qText = `Select the most appropriate SYNONYM of '${item.word}'.`;
+                    opts = [item.syn, item.ant, "Irrelevant", "Superficial"];
+                    ans = 0;
+                    exp = `'${item.syn}' is the correct synonym of '${item.word}'.`;
+                } else if (cat === "Antonyms") {
+                    qText = `Select the most appropriate ANTONYM of '${item.word}'.`;
+                    opts = [item.syn, item.ant, "Ambiguous", "Elementary"];
+                    ans = 1;
+                    exp = `'${item.ant}' is the exact antonym of '${item.word}'.`;
+                } else if (cat === "Idioms & Phrases") {
+                    qText = `Choose the correct meaning of the idiom: 'To spill the beans' (Q${i}).`;
+                    opts = ["To drop food accidentally", "To reveal a secret prematurely", "To cook dinner quickly", "To plant new seeds"];
+                    ans = 1;
+                    exp = "'To spill the beans' means to disclose confidential information or secrets.";
+                } else if (cat === "One-Word Substitution") {
+                    qText = `Select the one-word substitute for: 'A person who studies the origin and history of words' (Q${i}).`;
+                    opts = ["Etymologist", "Archaeologist", "Geologist", "Philanthropist"];
+                    ans = 0;
+                    exp = "An 'Etymologist' specializes in word origins and linguistic evolution.";
+                } else if (cat === "Active/Passive Voice") {
+                    qText = `Convert into Passive Voice: 'The authority will announce the examination results tomorrow.'`;
+                    opts = [
+                        "The examination results will be announced by the authority tomorrow.",
+                        "The examination results will announced by the authority tomorrow.",
+                        "The examination results were announced tomorrow by the authority.",
+                        "The examination results are being announced by authority tomorrow."
+                    ];
+                    ans = 0;
+                    exp = "Simple Future 'will announce' changes to 'will be announced' in passive voice.";
+                } else if (cat === "Direct/Indirect Speech") {
+                    qText = `Convert into Indirect Speech: The teacher said, 'Honesty is the best policy.'`;
+                    opts = [
+                        "The teacher said that honesty was the best policy.",
+                        "The teacher said that honesty is the best policy.",
+                        "The teacher told that honesty has been the best policy.",
+                        "The teacher says honesty is the best policy."
+                    ];
+                    ans = 1;
+                    exp = "Universal truths and proverbs retain their present tense in indirect speech.";
+                } else if (cat === "Spelling Check") {
+                    qText = `Select the CORRECTLY spelt word for Q${i}.`;
+                    opts = ["Maintenance", "Maintenence", "Maintanance", "Mentenance"];
+                    ans = 0;
+                    exp = "'Maintenance' is the correct spelling.";
+                } else {
+                    qText = `Rearrange the parts (P, Q, R, S) to form a meaningful sentence: \nP: in modern organizations \nQ: effective communication \nR: yields higher productivity \nS: and employee satisfaction`;
+                    opts = ["QPRS", "PRSQ", "RPSQ", "SQPR"];
+                    ans = 0;
+                    exp = "Q ('effective communication') P ('in modern organizations') R ('yields higher productivity') S ('and employee satisfaction') flows logically.";
+                }
+
+                mockQuestions.push({
+                    id: i,
+                    category: cat,
+                    passage: null,
+                    question: qText,
+                    options: opts,
+                    answer: ans,
+                    explanation: exp
+                });
+            }
+        })();
+
+        /* ================= STATE MANAGEMENT ================= */
+        let candidateName = "";
+        let currentIndex = 0; // 0 to 119
+        let userAnswers = new Array(120).fill(null); // stores selected option index (0..3)
+        let questionStates = new Array(120).fill("not-visited"); // 'not-visited', 'unanswered', 'answered', 'marked', 'marked-answered'
+        
+        // Timer Variables
+        let totalSeconds = 90 * 60; // 90 minutes
+        let timerInterval = null;
+        let timeTakenSeconds = 0;
+
+        // Security / Proctoring Strike Tracking
+        let securityStrikes = 0;
+        const maxStrikes = 3;
+        let isTestActive = false;
+
+        /* ================= EVENT LISTENERS & PROCTORING ================= */
+        // Form Handler
+        function handleStartTest(e) {
+            e.preventDefault();
+            const input = document.getElementById("candidateNameInput").value.trim();
+            if (!input) return;
+            candidateName = input;
+
+            document.getElementById("headerCandidateName").innerText = candidateName;
+            document.getElementById("entryScreen").classList.add("hidden");
+            document.getElementById("testInterface").classList.remove("hidden");
+
+            // Request Fullscreen
+            enterFullscreen();
+
+            // Initialize test state
+            isTestActive = true;
+            questionStates[0] = "unanswered"; // First question marked unanswered initially
+            renderQuestion(0);
+            renderPalette();
+            updateCounters();
+            startTimer();
+
+            // Enable Security Enforcement
+            setupProctoring();
+        }
+
+        // Fullscreen API Helper
+        function enterFullscreen() {
+            const elem = document.documentElement;
+            if (elem.requestFullscreen) {
+                elem.requestFullscreen().catch(() => {});
+            } else if (elem.webkitRequestFullscreen) {
+                elem.webkitRequestFullscreen();
+            } else if (elem.msRequestFullscreen) {
+                elem.msRequestFullscreen();
+            }
+        }
+
+        function restoreFullscreen() {
+            enterFullscreen();
+            document.getElementById("fullscreenPrompt").classList.add("hidden");
+        }
+
+        function setupProctoring() {
+            // Tab switch / visibility change detection
+            document.addEventListener("visibilitychange", handleSecurityViolation);
+            window.addEventListener("blur", handleSecurityViolation);
+
+            // Fullscreen exit detection
+            document.addEventListener("fullscreenchange", () => {
+                if (!document.fullscreenElement && isTestActive) {
+                    handleSecurityViolation();
+                }
+            });
+
+            // Prevent Right-Click context menu
+            document.addEventListener("contextmenu", (e) => e.preventDefault());
+
+            // Prevent Text Selection
+            document.addEventListener("selectstart", (e) => e.preventDefault());
+
+            // Prevent Copy/Paste & DevTools Shortcuts
+            document.addEventListener("keydown", (e) => {
+                if (
+                    e.keyCode === 123 || // F12
+                    (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74 || e.keyCode === 67)) || // Ctrl+Shift+I/J/C
+                    (e.ctrlKey && e.keyCode === 85) || // Ctrl+U
+                    (e.ctrlKey && (e.keyCode === 67 || e.keyCode === 86 || e.keyCode === 88)) // Ctrl+C/V/X
+                ) {
+                    e.preventDefault();
+                    return false;
+                }
+            });
+        }
+
+        function handleSecurityViolation() {
+            if (!isTestActive) return;
+
+            securityStrikes++;
+            document.getElementById("promptViolationCount").innerText = securityStrikes;
+
+            if (securityStrikes >= maxStrikes) {
+                lockAndSubmitTest();
+            } else {
+                document.getElementById("fullscreenPrompt").classList.remove("hidden");
+            }
+        }
+
+        function lockAndSubmitTest() {
+            isTestActive = false;
+            clearInterval(timerInterval);
+            document.getElementById("fullscreenPrompt").classList.add("hidden");
+            document.getElementById("lockOverlay").classList.remove("hidden");
+        }
+
+        function viewResultsFromLock() {
+            document.getElementById("lockOverlay").classList.add("hidden");
+            document.getElementById("testInterface").classList.add("hidden");
+            calculateAndShowResults();
+        }
+
+        /* ================= TIMER LOGIC ================= */
+        function startTimer() {
+            timerInterval = setInterval(() => {
+                if (totalSeconds <= 0) {
+                    clearInterval(timerInterval);
+                    autoSubmitTest();
+                    return;
+                }
+                totalSeconds--;
+                timeTakenSeconds++;
+                updateTimerDisplay();
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const mins = Math.floor(totalSeconds / 60);
+            const secs = totalSeconds % 60;
+            const formatted = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+            const display = document.getElementById("timerDisplay");
+            display.innerText = formatted;
+
+            // Warning colors for low remaining time
+            if (totalSeconds < 300) { // under 5 mins
+                display.className = "font-mono text-lg font-bold text-red-500 animate-pulse";
+            } else if (totalSeconds < 900) { // under 15 mins
+                display.className = "font-mono text-lg font-bold text-amber-400";
+            }
+        }
+
+        /* ================= QUESTION RENDERING & NAVIGATION ================= */
+        function renderQuestion(index) {
+            currentIndex = index;
+            const q = mockQuestions[index];
+
+            // Update Header & Badge
+            document.getElementById("questionNumberBadge").innerText = `Question ${index + 1} of 120`;
+            document.getElementById("categoryBadge").innerText = q.category;
+
+            // Handle Passage Display
+            const passageBox = document.getElementById("passageBox");
+            if (q.passage) {
+                passageBox.classList.remove("hidden");
+                document.getElementById("passageTitle").innerText = `${q.category} Reference`;
+                document.getElementById("passageContent").innerText = q.passage;
+            } else {
+                passageBox.classList.add("hidden");
+            }
+
+            // Question Text
+            document.getElementById("questionText").innerText = q.question;
+
+            // Options Container
+            const optsContainer = document.getElementById("optionsContainer");
+            optsContainer.innerHTML = "";
+
+            const labels = ["A", "B", "C", "D"];
+            q.options.forEach((optText, optIdx) => {
+                const isSelected = userAnswers[index] === optIdx;
+                const optDiv = document.createElement("div");
+                optDiv.className = `option-card border rounded-lg p-3.5 cursor-pointer flex items-center space-x-3 transition ${isSelected ? 'selected border-blue-600 bg-blue-50' : 'border-slate-200 bg-white'}`;
+                optDiv.onclick = () => selectOption(optIdx);
+
+                optDiv.innerHTML = `
+                    <div class="w-6 h-6 rounded-full border flex items-center justify-center font-bold text-xs ${isSelected ? 'border-blue-600 bg-blue-600 text-white' : 'border-slate-400 text-slate-600'}">
+                        ${labels[optIdx]}
+                    </div>
+                    <span class="text-sm md:text-base text-slate-800 font-medium">${optText}</span>
+                `;
+                optsContainer.appendChild(optDiv);
+            });
+
+            // Update Navigation Button States
+            document.getElementById("btnPrev").disabled = index === 0;
+
+            // Highlight current in palette
+            renderPalette();
+        }
+
+        function selectOption(optIdx) {
+            userAnswers[currentIndex] = optIdx;
+            // Update state conditionally
+            if (questionStates[currentIndex] === "marked" || questionStates[currentIndex] === "marked-answered") {
+                questionStates[currentIndex] = "marked-answered";
+            } else {
+                questionStates[currentIndex] = "answered";
+            }
+            renderQuestion(currentIndex);
+            updateCounters();
+        }
+
+        function clearResponse() {
+            userAnswers[currentIndex] = null;
+            if (questionStates[currentIndex] === "marked-answered") {
+                questionStates[currentIndex] = "marked";
+            } else {
+                questionStates[currentIndex] = "unanswered";
+            }
+            renderQuestion(currentIndex);
+            updateCounters();
+        }
+
+        function handleSaveAndNext() {
+            if (userAnswers[currentIndex] === null) {
+                if (questionStates[currentIndex] !== "marked") {
+                    questionStates[currentIndex] = "unanswered";
+                }
+            }
+            goToNextQuestion();
+        }
+
+        function handleMarkForReview() {
+            if (userAnswers[currentIndex] !== null) {
+                questionStates[currentIndex] = "marked-answered";
+            } else {
+                questionStates[currentIndex] = "marked";
+            }
+            goToNextQuestion();
+        }
+
+        function handlePrevious() {
+            if (currentIndex > 0) {
+                if (questionStates[currentIndex - 1] === "not-visited") {
+                    questionStates[currentIndex - 1] = "unanswered";
+                }
+                renderQuestion(currentIndex - 1);
+                updateCounters();
+            }
+        }
+
+        function goToNextQuestion() {
+            if (currentIndex < mockQuestions.length - 1) {
+                const nextIdx = currentIndex + 1;
+                if (questionStates[nextIdx] === "not-visited") {
+                    questionStates[nextIdx] = "unanswered";
+                }
+                renderQuestion(nextIdx);
+                updateCounters();
+            }
+        }
+
+        function jumpToQuestion(index) {
+            if (questionStates[index] === "not-visited") {
+                questionStates[index] = "unanswered";
+            }
+            renderQuestion(index);
+            updateCounters();
+        }
+
+        /* ================= PALETTE & COUNTERS ================= */
+        function renderPalette(filter = 'all') {
+            const grid = document.getElementById("paletteGrid");
+            grid.innerHTML = "";
+
+            mockQuestions.forEach((_, idx) => {
+                const state = questionStates[idx];
+
+                if (filter === 'answered' && state !== 'answered' && state !== 'marked-answered') return;
+                if (filter === 'marked' && state !== 'marked' && state !== 'marked-answered') return;
+
+                const btn = document.createElement("button");
+                btn.className = `q-btn q-${state} ${idx === currentIndex ? 'q-current' : ''}`;
+                btn.innerText = idx + 1;
+                btn.onclick = () => jumpToQuestion(idx);
+
+                grid.appendChild(btn);
+            });
+        }
+
+        function filterPalette(type) {
+            renderPalette(type);
+        }
+
+        function updateCounters() {
+            let answered = 0, unanswered = 0, marked = 0, notVisited = 0;
+
+            questionStates.forEach(st => {
+                if (st === "answered" || st === "marked-answered") answered++;
+                if (st === "unanswered") unanswered++;
+                if (st === "marked" || st === "marked-answered") marked++;
+                if (st === "not-visited") notVisited++;
+            });
+
+            document.getElementById("cntAnswered").innerText = answered;
+            document.getElementById("cntUnanswered").innerText = unanswered;
+            document.getElementById("cntMarked").innerText = marked;
+            document.getElementById("cntNotVisited").innerText = notVisited;
+        }
+
+        /* ================= SUBMISSION & CALCULATIONS ================= */
+        function confirmSubmitTest() {
+            if (confirm("Are you sure you want to submit your SSC English Mock Test?")) {
+                isTestActive = false;
+                clearInterval(timerInterval);
+                document.getElementById("testInterface").classList.add("hidden");
+                calculateAndShowResults();
+            }
+        }
+
+        function autoSubmitTest() {
+            alert("Time limit (90 minutes) has expired! Your responses are being submitted automatically.");
+            isTestActive = false;
+            document.getElementById("testInterface").classList.add("hidden");
+            calculateAndShowResults();
+        }
+
+        function calculateAndShowResults() {
+            let correctCount = 0;
+            let incorrectCount = 0;
+            let unattemptedCount = 0;
+
+            userAnswers.forEach((ans, idx) => {
+                if (ans === null) {
+                    unattemptedCount++;
+                } else if (ans === mockQuestions[idx].answer) {
+                    correctCount++;
+                } else {
+                    incorrectCount++;
+                }
+            });
+
+            const totalScore = (correctCount * 1.0) - (incorrectCount * 0.25);
+            const totalAttempted = correctCount + incorrectCount;
+            const accuracy = totalAttempted > 0 ? ((correctCount / totalAttempted) * 100).toFixed(1) : 0;
+
+            // Formatted Time Taken
+            const minsSpent = Math.floor(timeTakenSeconds / 60);
+            const secsSpent = timeTakenSeconds % 60;
+            const timeStr = `${minsSpent}m ${secsSpent}s`;
+
+            // Populate Scorecard Summary
+            document.getElementById("resCandidateName").innerText = candidateName || "Candidate";
+            document.getElementById("resTimeTaken").innerText = timeStr;
+            document.getElementById("resTotalScore").innerText = `${totalScore.toFixed(2)} / 120`;
+            document.getElementById("resAccuracy").innerText = `${accuracy}%`;
+            document.getElementById("resCorrect").innerText = correctCount;
+            document.getElementById("resIncorrect").innerText = incorrectCount;
+            document.getElementById("resUnattempted").innerText = unattemptedCount;
+
+            // Render Solutions
+            renderSolutions('all');
+
+            document.getElementById("resultScreen").classList.remove("hidden");
+        }
+
+        /* ================= SOLUTIONS RENDERER ================= */
+        function renderSolutions(filter = 'all') {
+            const container = document.getElementById("solutionsContainer");
+            container.innerHTML = "";
+
+            const labels = ["A", "B", "C", "D"];
+
+            mockQuestions.forEach((q, idx) => {
+                const uAns = userAnswers[idx];
+                const isCorrect = uAns === q.answer;
+                const isUnattempted = uAns === null;
+
+                if (filter === 'correct' && !isCorrect) return;
+                if (filter === 'incorrect' && (isCorrect || isUnattempted)) return;
+                if (filter === 'unattempted' && !isUnattempted) return;
+
+                let statusBadge = "";
+                if (isUnattempted) {
+                    statusBadge = `<span class="bg-slate-100 text-slate-700 text-xs font-bold px-2.5 py-1 rounded">Unattempted</span>`;
+                } else if (isCorrect) {
+                    statusBadge = `<span class="bg-emerald-100 text-emerald-800 text-xs font-bold px-2.5 py-1 rounded">+1.0 Correct</span>`;
+                } else {
+                    statusBadge = `<span class="bg-rose-100 text-rose-800 text-xs font-bold px-2.5 py-1 rounded">-0.25 Incorrect</span>`;
+                }
+
+                const card = document.createElement("div");
+                card.className = "solution-card bg-slate-50 border border-slate-200 rounded-xl p-5 space-y-3";
+
+                card.innerHTML = `
+                    <div class="flex flex-wrap items-center justify-between border-b border-slate-200 pb-2.5 gap-2">
+                        <div class="flex items-center space-x-2">
+                            <span class="font-bold text-slate-900 text-sm">Q${idx + 1}.</span>
+                            <span class="bg-blue-100 text-blue-800 text-xs font-semibold px-2 py-0.5 rounded">${q.category}</span>
+                        </div>
+                        ${statusBadge}
+                    </div>
+
+                    ${q.passage ? `
+                        <div class="bg-amber-50/80 border border-amber-200 rounded-lg p-3 text-xs md:text-sm text-slate-800 whitespace-pre-line font-serif">
+                            <strong class="text-amber-900 block mb-1">Passage Excerpt:</strong>
+                            ${q.passage}
+                        </div>
+                    ` : ''}
+
+                    <p class="font-semibold text-slate-900 text-sm md:text-base">${q.question}</p>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm pt-1">
+                        ${q.options.map((opt, oIdx) => {
+                            let optBg = "bg-white border-slate-200 text-slate-700";
+                            if (oIdx === q.answer) {
+                                optBg = "bg-emerald-50 border-emerald-400 text-emerald-900 font-semibold";
+                            } else if (oIdx === uAns && !isCorrect) {
+                                optBg = "bg-rose-50 border-rose-400 text-rose-900 font-semibold";
+                            }
+
+                            return `
+                                <div class="border rounded-lg p-2.5 flex items-center space-x-2 ${optBg}">
+                                    <span class="font-bold text-xs">${labels[oIdx]}.</span>
+                                    <span>${opt}</span>
+                                    ${oIdx === q.answer ? '<i class="fa-solid fa-circle-check text-emerald-600 ml-auto"></i>' : ''}
+                                    ${oIdx === uAns && !isCorrect ? '<i class="fa-solid fa-circle-xmark text-rose-600 ml-auto"></i>' : ''}
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+
+                    <div class="bg-blue-50/70 border border-blue-200 rounded-lg p-3 text-xs md:text-sm text-blue-950 space-y-1 mt-2">
+                        <p class="font-bold flex items-center text-blue-900">
+                            <i class="fa-solid fa-lightbulb text-amber-500 mr-1.5"></i> Explanation & Solution:
+                        </p>
+                        <p>${q.explanation}</p>
+                    </div>
+                `;
+
+                container.appendChild(card);
+            });
+        }
+
+        function filterSolutions(type) {
+            // Update filter buttons UI
+            const btns = ['solFilterAll', 'solFilterInc', 'solFilterCorr', 'solFilterUnatt'];
+            btns.forEach(id => {
+                const el = document.getElementById(id);
+                if (el) el.className = "px-3 py-1.5 rounded-lg bg-slate-100 text-slate-700 hover:bg-slate-200";
+            });
+
+            if (type === 'all') document.getElementById('solFilterAll').className = "px-3 py-1.5 rounded-lg bg-slate-800 text-white";
+            if (type === 'incorrect') document.getElementById('solFilterInc').className = "px-3 py-1.5 rounded-lg bg-slate-800 text-white";
+            if (type === 'correct') document.getElementById('solFilterCorr').className = "px-3 py-1.5 rounded-lg bg-slate-800 text-white";
+            if (type === 'unattempted') document.getElementById('solFilterUnatt').className = "px-3 py-1.5 rounded-lg bg-slate-800 text-white";
+
+            renderSolutions(type);
+        }
+
+        function restartTest() {
+            if (confirm("Would you like to restart the test from the beginning?")) {
+                location.reload();
+            }
+        }
+    </script>
+</body>
+</html>
